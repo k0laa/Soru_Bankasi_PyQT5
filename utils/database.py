@@ -49,3 +49,6 @@ class Database:
 
     def close(self):
         self.connection.close()
+
+    def __del__(self):
+        self.close()
