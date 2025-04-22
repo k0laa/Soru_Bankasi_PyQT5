@@ -8,6 +8,28 @@ class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
         self.setupUi(self)
         self.db = Database()
         self.pushButton.clicked.connect(self.save_question)
+        self.pushButton_2.clicked.connect(self.delete_selected_question)  # Sil butonu
+        self.load_questions()  # Soruları tabloya yükle
+
+    def load_questions(self):
+        self.tableWidget.setRowCount(0)
+        questions = self.db.get_all_questions()
+        self.tableWidget.setColumnCount(7)  # Doğru cevap sütunu dahil
+        self.tableWidget.setHorizontalHeaderLabels(["ID", "Soru", "1. Seçenek", "2. Seçenek", "3. Seçenek", "4. Seçenek", "Doğru Cevap"])
+        for row_number, row_data in enumerate(questions):
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+    def delete_selected_question(self):
+        selected_row = self.tableWidget.currentRow()
+        if selected_row == -1:
+            QMessageBox.warning(self, "Hata", "Lütfen silmek istediğiniz soruyu seçin.")
+            return
+        question_id = self.tableWidget.item(selected_row, 0).text()
+        self.db.delete_question(question_id)
+        QMessageBox.information(self, "Başarılı", "Soru başarıyla silindi.")
+        self.load_questions()
 
     def save_question(self):
         soru = self.textEdit.toPlainText()
@@ -33,6 +55,7 @@ class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
         self.db.add_question(soru, secenek1, secenek2, secenek3, secenek4, dogru_cevap)
         QMessageBox.information(self, "Başarılı", "Soru başarıyla kaydedildi.")
         self.clear_fields()
+        self.load_questions()
 
     def clear_fields(self):
         self.textEdit.clear()
