@@ -19,3 +19,14 @@ class Database:
         )
         """)
         self.connection.commit()
+
+    def add_question(self, soru, secenek1, secenek2, secenek3, secenek4, dogru_cevap):
+        self.cursor.execute("""
+        INSERT INTO sorular (soru, secenek1, secenek2, secenek3, secenek4, dogru_cevap)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """, (soru, secenek1, secenek2, secenek3, secenek4, dogru_cevap))
+        self.connection.commit()
+
+    def delete_question(self, question_id):
+        self.cursor.execute("DELETE FROM sorular WHERE id = ?", (question_id,))
+        self.connection.commit()
