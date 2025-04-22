@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
 from ui.yeni_soru import YeniSoruWindowUI
 from utils.database import Database
+from windows.yazdir_window import YazdirWindow
+
 
 class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
     def __init__(self):
@@ -8,8 +10,9 @@ class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
         self.setupUi(self)
         self.db = Database()
         self.pushButton.clicked.connect(self.save_question)
-        self.pushButton_2.clicked.connect(self.delete_selected_question)  # Sil butonu
-        self.load_questions()  # Soruları tabloya yükle
+        self.pushButton_2.clicked.connect(self.delete_selected_question)
+        self.pushButton_3.clicked.connect(self.open_yazdir_window)
+        self.load_questions()
 
     def load_questions(self):
         self.tableWidget.setRowCount(0)
@@ -82,3 +85,6 @@ class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
         self.db.close()
         super().closeEvent(event)
 
+    def open_yazdir_window(self):
+        self.yazdir_window = YazdirWindow()
+        self.yazdir_window.show()
