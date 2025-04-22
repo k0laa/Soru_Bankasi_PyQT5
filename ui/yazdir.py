@@ -21,6 +21,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setObjectName("listWidget")
+        self.listWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)  # Çoklu seçim
         self.verticalLayout.addWidget(self.listWidget)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setObjectName("pushButton")
