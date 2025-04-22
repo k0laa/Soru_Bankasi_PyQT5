@@ -11,16 +11,6 @@ class YazdirWindow(QMainWindow, Ui_MainWindow):
         self.db = Database()
         self.selected_questions = []
 
-        # Yeni filtreleme alanı
-        self.filter_input = QLineEdit(self)
-        self.filter_input.setPlaceholderText("Filtreleme için anahtar kelime girin...")
-        self.filter_input.textChanged.connect(self.filter_questions)
-
-        self.filter_label = QLabel("Filtreleme:", self)
-        self.layout = QVBoxLayout(self.centralwidget)
-        self.layout.insertWidget(0, self.filter_label)
-        self.layout.insertWidget(1, self.filter_input)
-
         self.pushButton.clicked.connect(self.print_question)
         self.listWidget.itemSelectionChanged.connect(self.select_questions)
 
