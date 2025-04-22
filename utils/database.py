@@ -30,3 +30,10 @@ class Database:
     def delete_question(self, question_id):
         self.cursor.execute("DELETE FROM sorular WHERE id = ?", (question_id,))
         self.connection.commit()
+
+    def get_all_questions(self):
+        self.cursor.execute("SELECT * FROM sorular")
+        return self.cursor.fetchall()
+
+    def close(self):
+        self.connection.close()
