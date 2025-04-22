@@ -31,6 +31,16 @@ class YeniSoruWindow(QMainWindow, YeniSoruWindowUI):
         QMessageBox.information(self, "Başarılı", "Soru başarıyla silindi.")
         self.load_questions()
 
+    def load_questions(self):
+        self.tableWidget.setRowCount(0)
+        questions = self.db.get_all_questions()
+        self.tableWidget.setColumnCount(7)  # Doğru cevap sütunu dahil
+        self.tableWidget.setHorizontalHeaderLabels(["ID", "Soru", "1. Seçenek", "2. Seçenek", "3. Seçenek", "4. Seçenek", "Doğru Cevap"])
+        for row_number, row_data in enumerate(questions):
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
     def save_question(self):
         soru = self.textEdit.toPlainText()
         secenek1 = self.lineEdit_4.text()
