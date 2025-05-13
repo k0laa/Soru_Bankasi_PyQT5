@@ -7,6 +7,7 @@ Bu proje, PyQt5 kullanılarak geliştirilmiş bir soru bankası uygulamasıdır.
 - **Soru Listeleme**: Mevcut soruları görüntüleyebilirsiniz.
 - **Soru Silme**: Soruları silebilirsiniz.
 - **PDF Yazdırma**: Seçilen soruları PDF formatında yazdırabilirsiniz.
+- **Excel Kaydetme**: Sorular Excel formatında kayıt edilir.
 
 ## Kurulum
 1. Projeyi klonlayın:
