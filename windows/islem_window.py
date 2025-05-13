@@ -3,7 +3,6 @@ from ui.islem import IslemWindowUI
 from windows.yeni_soru_window import YeniSoruWindow
 from windows.yazdir_window import YazdirWindow
 
-
 class MainWindow(QMainWindow, IslemWindowUI):
     def __init__(self):
         super().__init__()
