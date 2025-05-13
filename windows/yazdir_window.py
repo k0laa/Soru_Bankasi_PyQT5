@@ -42,6 +42,7 @@ class YazdirWindow(QMainWindow, Ui_MainWindow):
 
             document = QTextDocument()
             content = ""
+            answers = "<b>Doğru Cevaplar:</b><br><br>"
 
             questions = self.excel.read_data()
             for question in questions:
@@ -51,7 +52,11 @@ class YazdirWindow(QMainWindow, Ui_MainWindow):
                     content += f"B) {question[3]}<br>"
                     content += f"C) {question[4]}<br>"
                     content += f"D) {question[5]}<br><br>"
-                    content += f"<b>Doğru Cevap:</b> {question[6]}<br><hr><br>"
+                    content += f"<br><hr><br>"
+                    answers += f"Soru {question[0]}: {question[6]}<br>"
+
+            content += "<div style='page-break-before: always;'></div>"  # Yeni sayfa
+            content += answers
 
             document.setHtml(content)
             document.print_(printer)
